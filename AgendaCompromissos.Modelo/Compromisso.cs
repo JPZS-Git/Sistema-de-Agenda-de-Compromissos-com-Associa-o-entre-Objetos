@@ -4,24 +4,21 @@ namespace AgendaCompromissos.Modelo;
 
 public class Compromisso
 {
-  public required DateTime Data{get; set;}
-  public required TimeSpan Hora{get; set;}
-  public required string Descricao{get; set;}
-  public required Usuario Usuario; // ASSOCIAÇÃO SIMPLES
-  public required Local Local;
-  public List<Participante> Participantes = []; // ASSOCIAÇÃO N:N
-  public List<Anotacao> Anotacoes = []; // COMPOSIÇÃO
-
-  public List<string> ErrosDeValidacao = [];
+    public DateTime Data{get; set;}
+    public TimeSpan Hora{get; set;}
+    public required string Descricao{get; set;}
+    public required Usuario Usuario; // ASSOCIAÇÃO SIMPLES
+    public required Local Local;
+    public List<Participante> Participantes = []; // ASSOCIAÇÃO N:N
+    public List<Anotacao> Anotacoes = []; // COMPOSIÇÃO
+    public List<string> ErrosDeValidacao = [];
 
     public Compromisso(
         DateTime data,
         TimeSpan hora,
         string descricao,
         Usuario usuario,
-        Local local,
-        List<Participante> participantes,
-        List<Anotacao> anotacoes)
+        Local local)
     {
         if (!ValidarCompromisso(data, hora, descricao))
         {
@@ -33,9 +30,7 @@ public class Compromisso
         Descricao = descricao;
         Usuario = usuario;
         Local = local;
-        Participantes = participantes;
-        Anotacoes = anotacoes;
-    }
+    } 
 
  public bool ValidarCompromisso(DateTime data, TimeSpan hora, String descricao) {
         DateTime dataAtual = DateTime.Today.AddDays(1);
